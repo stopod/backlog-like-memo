@@ -15,17 +15,6 @@ const mainTask: MainTask = {
   childTask: null,
 };
 
-const MainTaskBox = (props: MainTask) => {
-  return (
-    <>
-      <p>{props.id}</p>
-      <p>{props.author}</p>
-      <p>{props.title}</p>
-      <p>{props.details}</p>
-    </>
-  );
-};
-
 export const App = () => {
   return (
     <>
