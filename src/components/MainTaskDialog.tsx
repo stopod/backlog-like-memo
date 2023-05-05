@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { styled } from "@mui/material/styles";
 
 export type MainTask = {
   id: number;
@@ -15,17 +16,14 @@ export type MainTask = {
   childTask: number[] | null;
 };
 
-// const useStyles = makeStyles((theme) => ({
-//   button: {
-//     width: "150px",
-//     height: "150px",
-//     borderRadius: "3px",
-//     display: "block",
-//   },
-// }));
+const TitleButton = styled(Button)({
+  width: "150px",
+  height: "150px",
+  borderRadius: "3px",
+  display: "block",
+});
 
 export const MainTaskDialog = (props: MainTask) => {
-  // const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -38,13 +36,9 @@ export const MainTaskDialog = (props: MainTask) => {
 
   return (
     <React.Fragment>
-      <Button
-        // className={classes.button}
-        variant="outlined"
-        onClick={handleClickOpen}
-      >
+      <TitleButton variant="outlined" onClick={handleClickOpen}>
         {props.title}
-      </Button>
+      </TitleButton>
       <Dialog
         fullWidth={true}
         maxWidth={"lg"}
