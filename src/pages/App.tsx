@@ -9,8 +9,8 @@ import { MainTaskDialog, MainTask } from "../components/MainTaskDialog";
 
 const mainTask: MainTask = {
   id: 1,
-  title: "サンプルタイトル",
-  details: "サンプルサンプルサンプルサンプルサンプル",
+  title: "メインタスクのタイトル",
+  details: "メインタスクの詳細",
   author: "stopod",
   childTask: null,
 };
