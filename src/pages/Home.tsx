@@ -1,11 +1,5 @@
+import { Header } from "../components/Header";
 import { MainTaskDialog, MainTask } from "../components/MainTaskDialog";
-
-// type ChildTask = {
-//   id: number;
-//   title: string;
-//   details: string;
-//   author: string;
-// };
 
 const mainTasks: MainTask[] = [
   {
@@ -34,6 +28,7 @@ const mainTasks: MainTask[] = [
 export const Home = () => {
   return (
     <>
+      <Header />
       {mainTasks.map((mainTask) => (
         <MainTaskDialog {...mainTask} />
       ))}

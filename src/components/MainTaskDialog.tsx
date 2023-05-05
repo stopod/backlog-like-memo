@@ -7,6 +7,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 export type MainTask = {
   id: number;
@@ -17,10 +20,17 @@ export type MainTask = {
 };
 
 const TitleButton = styled(Button)({
-  width: "150px",
-  height: "150px",
+  width: "100%",
+  height: "50px",
   borderRadius: "3px",
   display: "block",
+  margin: "3px",
+  textAlign: "left",
+});
+
+const TitleIcon = styled(ArrowRightIcon)({
+  display: "inline-block",
+  verticalAlign: "middle",
 });
 
 export const MainTaskDialog = (props: MainTask) => {
@@ -36,9 +46,12 @@ export const MainTaskDialog = (props: MainTask) => {
 
   return (
     <React.Fragment>
+      {/* 表示 */}
       <TitleButton variant="outlined" onClick={handleClickOpen}>
+        <TitleIcon />
         {props.title}
       </TitleButton>
+      {/* 詳細 */}
       <Dialog
         fullWidth={true}
         maxWidth={"lg"}
