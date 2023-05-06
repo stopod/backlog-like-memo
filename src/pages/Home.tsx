@@ -50,9 +50,8 @@ const mainTasks: MainTask[] = [
 export const Home = () => {
   return (
     <>
-      <Headers />
-      {mainTasks.map((mainTask) => (
-        <MainTaskList {...mainTask} />
+      {mainTasks.map((mainTask, index) => (
+        <MainTaskList key={index} {...mainTask} />
       ))}
     </>
   );

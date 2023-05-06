@@ -67,9 +67,9 @@ export const MainTaskList = (props: MainTask) => {
           {childTasks ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={childTasks} timeout="auto" unmountOnExit>
-          {props.childTasks?.map((childTask) => {
+          {props.childTasks?.map((childTask, index) => {
             console.log(props.childTasks);
-            return <ChildTaskList {...childTask} />;
+            return <ChildTaskList key={index} {...childTask} />;
           })}
         </Collapse>
       </List>
