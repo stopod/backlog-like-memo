@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
-export const Header = () => {
+export const Headers = () => {
   return (
     <Button variant="text">
       <PlaylistAddIcon />

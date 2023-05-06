@@ -1,4 +1,4 @@
-import { Header } from "../components/Header";
+import { Headers } from "../components/Headers";
 import { MainTaskList, MainTask } from "../components/MainTaskList";
 
 const mainTasks: MainTask[] = [
@@ -50,7 +50,7 @@ const mainTasks: MainTask[] = [
 export const Home = () => {
   return (
     <>
-      <Header />
+      <Headers />
       {mainTasks.map((mainTask) => (
         <MainTaskList {...mainTask} />
       ))}

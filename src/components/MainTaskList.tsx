@@ -13,10 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
-import { useState } from "react";
 import TaskIcon from "@mui/icons-material/Task";
-import TaskOutlinedIcon from "@mui/icons-material/TaskOutlined";
 import { ChildTaskList } from "./ChildTaskList";
 
 export type MainTask = {
@@ -36,8 +33,8 @@ export type ChildTask = {
 };
 
 export const MainTaskList = (props: MainTask) => {
-  const [openDetails, setOpenDetails] = useState(false);
-  const [childTasks, setChildTasks] = useState(false);
+  const [openDetails, setOpenDetails] = React.useState(false);
+  const [childTasks, setChildTasks] = React.useState(false);
 
   const handleClickOpenDetals = () => {
     setOpenDetails(true);
@@ -70,14 +67,6 @@ export const MainTaskList = (props: MainTask) => {
           {childTasks ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={childTasks} timeout="auto" unmountOnExit>
-          {/* <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <TaskOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Starred" />
-            </ListItemButton>
-          </List> */}
           {props.childTasks?.map((childTask) => {
             console.log(props.childTasks);
             return <ChildTaskList {...childTask} />;
