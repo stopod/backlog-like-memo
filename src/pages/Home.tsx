@@ -1,5 +1,5 @@
 import { Header } from "../components/Header";
-import { MainTaskDialog, MainTask } from "../components/MainTaskDialog";
+import { MainTaskList, MainTask } from "../components/MainTaskList";
 
 const mainTasks: MainTask[] = [
   {
@@ -7,21 +7,43 @@ const mainTasks: MainTask[] = [
     title: "朝ごはんを買う",
     details: "松屋いく",
     author: "stopod",
-    childTask: null,
+    childTasks: [
+      {
+        id: 11,
+        title: "店舗に行く",
+        details: "駅のところの",
+        status: 0,
+        author: "stopod",
+      },
+      {
+        id: 12,
+        title: "食券を買う",
+        details: "味噌汁抜き",
+        status: 0,
+        author: "stopod",
+      },
+      {
+        id: 13,
+        title: "店員に渡す",
+        details: "よろしくね",
+        status: 0,
+        author: "stopod",
+      },
+    ],
   },
   {
     id: 2,
     title: "昼ご飯を買う",
     details: "吉野家いく",
     author: "stopod",
-    childTask: null,
+    childTasks: null,
   },
   {
     id: 3,
     title: "夜ご飯を買う",
     details: "すき屋いく",
     author: "stopod",
-    childTask: null,
+    childTasks: null,
   },
 ];
 
@@ -30,7 +52,7 @@ export const Home = () => {
     <>
       <Header />
       {mainTasks.map((mainTask) => (
-        <MainTaskDialog {...mainTask} />
+        <MainTaskList {...mainTask} />
       ))}
     </>
   );
