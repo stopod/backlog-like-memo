@@ -7,9 +7,17 @@ export type MainTask = {
   createTime: string;
 };
 
+const document = {
+  collection: "MainTask",
+  database: "BacklogLikeMemo",
+  dataSource: "Cluster0",
+};
+
 const memoApi = {
   create: async (params: MainTask) =>
-    await axiosClient.post("/action/insertOne", params),
+    await axiosClient.post("/insertOne", params),
+  findAll: async () =>
+    await axiosClient.post("/find", JSON.stringify(document)),
 };
 
 export default memoApi;

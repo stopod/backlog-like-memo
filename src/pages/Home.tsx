@@ -1,4 +1,3 @@
-import { Headers } from "../components/Headers";
 import { MainTaskList, MainTask } from "../components/MainTaskList";
 
 const mainTasks: MainTask[] = [
