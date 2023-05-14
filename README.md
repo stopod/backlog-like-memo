@@ -19,3 +19,7 @@ https://backlog-like-memo.vercel.app/
 - ReactApp の環境変数
   .env ファイルの作成、REACT_APP_HOGEHOGE で命名  
   npm run build <- これ
+
+- 403 エラーの解消  
+   https://realm.mongodb.com/groups/64560c79d311ea6274c87c5a/apps/6457383f88025670f5e93ac4/settings/general
+  　ここで設定が必要だった
