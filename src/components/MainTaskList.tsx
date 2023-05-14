@@ -17,11 +17,12 @@ import TaskIcon from "@mui/icons-material/Task";
 import { ChildTaskList } from "./ChildTaskList";
 
 export type MainTask = {
-  id: number;
+  _id: string;
   title: string;
   details: string;
   author: string;
-  childTasks: ChildTask[] | null;
+  // createTime: string;
+  childTasks: ChildTask[] | null | undefined;
 };
 
 export type ChildTask = {
@@ -67,8 +68,8 @@ export const MainTaskList = (props: MainTask) => {
           {childTasks ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={childTasks} timeout="auto" unmountOnExit>
+          {/* TODO: ChildTasks */}
           {props.childTasks?.map((childTask, index) => {
-            console.log(props.childTasks);
             return <ChildTaskList key={index} {...childTask} />;
           })}
         </Collapse>
@@ -81,7 +82,7 @@ export const MainTaskList = (props: MainTask) => {
         onClose={handleCloseDetails}
       >
         <DialogTitle>
-          {props.id}-{props.title}
+          {props._id}-{props.title}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>{props.details}</DialogContentText>

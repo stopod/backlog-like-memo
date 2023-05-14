@@ -1,6 +1,7 @@
 import axiosClient from "./axiosClient";
 
 export type MainTask = {
+  _id: string;
   title: string;
   author: string;
   details: string;
@@ -14,9 +15,8 @@ const document = {
 };
 
 const memoApi = {
-  create: async (params: MainTask) =>
-    await axiosClient.post("/insertOne", params),
-  findAll: async () =>
+  create: async (param: any) => await axiosClient.post("/insertOne", param),
+  findAll: async (): Promise<MainTask[]> =>
     await axiosClient.post("/find", JSON.stringify(document)),
 };
 

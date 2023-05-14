@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { MainTaskList, MainTask } from "../components/MainTaskList";
+import memoApi from "../api/mainTaskApi";
 
-const mainTasks: MainTask[] = [
+const mainTasksMock = [
   {
-    id: 1,
+    _id: "1",
     title: "朝ごはんを買う",
     details: "松屋いく",
     author: "stopod",
@@ -31,14 +33,14 @@ const mainTasks: MainTask[] = [
     ],
   },
   {
-    id: 2,
+    _id: "2",
     title: "昼ご飯を買う",
     details: "吉野家いく",
     author: "stopod",
     childTasks: null,
   },
   {
-    id: 3,
+    _id: "3",
     title: "夜ご飯を買う",
     details: "すき屋いく",
     author: "stopod",
@@ -47,11 +49,20 @@ const mainTasks: MainTask[] = [
 ];
 
 export const Home = () => {
+  // const [mainTasks, setMainTasks] = useState(mainTasksMock);
+
+  const findMemoAll = async () => {
+    const memos = await memoApi.findAll();
+    // setMainTasks(memos);
+    console.log(memos);
+  };
+
   return (
     <>
-      {mainTasks.map((mainTask, index) => (
+      {mainTasksMock.map((mainTask, index) => (
         <MainTaskList key={index} {...mainTask} />
       ))}
+      <button onClick={findMemoAll}>デバック用</button>
     </>
   );
 };
