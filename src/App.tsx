@@ -8,9 +8,7 @@ const App = () => {
     axios
       .post(
         process.env.REACT_APP_MONGODB_ACCES_TOKEN_URL as string,
-        JSON.stringify({
-          key: process.env.REACT_APP_MONGODB_API_KEY,
-        }),
+        {},
         {
           headers: {
             "Content-Type": "application/json",
