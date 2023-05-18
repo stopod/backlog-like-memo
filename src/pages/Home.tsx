@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { MainTaskList, MainTask } from "../components/MainTaskList";
-import memoApi from "../api/mainTaskApi";
+import { memo, useEffect, useLayoutEffect, useState } from "react";
+import { MainTaskList, Tasks } from "../components/MainTaskList";
+import memoApi, { MainTask } from "../api/mainTaskApi";
+import { ChildTaskList } from "../components/ChildTaskList";
 
 const mainTasksMock = [
   {
@@ -8,6 +9,7 @@ const mainTasksMock = [
     title: "朝ごはんを買う",
     details: "松屋いく",
     author: "stopod",
+    createTime: "",
     childTasks: [
       {
         id: 11,
@@ -37,6 +39,7 @@ const mainTasksMock = [
     title: "昼ご飯を買う",
     details: "吉野家いく",
     author: "stopod",
+    createTime: "",
     childTasks: null,
   },
   {
@@ -44,25 +47,64 @@ const mainTasksMock = [
     title: "夜ご飯を買う",
     details: "すき屋いく",
     author: "stopod",
+    createTime: "",
     childTasks: null,
   },
 ];
 
 export const Home = () => {
-  // const [mainTasks, setMainTasks] = useState(mainTasksMock);
+  const [mainTasks, setMainTasks] = useState<Tasks[]>([]);
 
-  const findMemoAll = async () => {
-    const memos = await memoApi.findAll();
-    // setMainTasks(memos);
-    console.log(memos);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const mainTasks = await memoApi.findAll();
+        const mainTasksAddChild: Tasks[] = mainTasks.map((mainTask) => {
+          return {
+            _id: mainTask._id,
+            title: mainTask.title,
+            details: mainTask.details,
+            author: mainTask.author,
+            createTime: mainTask.createTime,
+            childTasks: [
+              {
+                id: 11,
+                title: "sample child task",
+                details: "sample sample sample",
+                status: 0,
+                author: "stopod",
+              },
+              {
+                id: 12,
+                title: "sample child task",
+                details: "sample sample sample",
+                status: 0,
+                author: "stopod",
+              },
+              {
+                id: 13,
+                title: "sample child task",
+                details: "sample sample sample",
+                status: 0,
+                author: "stopod",
+              },
+            ],
+          };
+        });
+
+        setMainTasks(mainTasksAddChild);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
-      {mainTasksMock.map((mainTask, index) => (
-        <MainTaskList key={index} {...mainTask} />
+      {mainTasks.map((mainTask) => (
+        <MainTaskList key={mainTask._id} {...mainTask} />
       ))}
-      <button onClick={findMemoAll}>デバック用</button>
     </>
   );
 };

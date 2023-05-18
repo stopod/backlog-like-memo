@@ -16,12 +16,12 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import TaskIcon from "@mui/icons-material/Task";
 import { ChildTaskList } from "./ChildTaskList";
 
-export type MainTask = {
+export type Tasks = {
   _id: string;
   title: string;
   details: string;
   author: string;
-  // createTime: string;
+  createTime: string;
   childTasks: ChildTask[] | null | undefined;
 };
 
@@ -33,7 +33,7 @@ export type ChildTask = {
   status: number;
 };
 
-export const MainTaskList = (props: MainTask) => {
+export const MainTaskList = (props: Tasks) => {
   const [openDetails, setOpenDetails] = React.useState(false);
   const [childTasks, setChildTasks] = React.useState(false);
 

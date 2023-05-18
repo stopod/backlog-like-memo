@@ -19,7 +19,7 @@ axiosClient.interceptors.request.use((config: any) => {
 
 axiosClient.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response.data.documents;
   },
   (err) => {
     throw err.response;
