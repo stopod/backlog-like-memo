@@ -17,7 +17,15 @@ const document = {
 const memoApi = {
   create: async (param: any) => await axiosClient.post("/insertOne", param),
   findAll: async (): Promise<MainTask[]> =>
-    await axiosClient.post("/find", JSON.stringify(document)),
+    await axiosClient.post("/find", document),
+  deleteOne: async (filter: any) => {
+    const param = {
+      ...document,
+      filter,
+    };
+
+    const res = await axiosClient.post("/deleteOne", param);
+  },
 };
 
 export default memoApi;

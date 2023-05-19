@@ -15,6 +15,8 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import TaskIcon from "@mui/icons-material/Task";
 import { ChildTaskList } from "./ChildTaskList";
+import memoApi from "../api/mainTaskApi";
+// import { ObjectId } from "mongodb";
 
 export type Tasks = {
   _id: string;
@@ -49,6 +51,13 @@ export const MainTaskList = (props: Tasks) => {
     setChildTasks(!childTasks);
   };
 
+  const deleteTask = async () => {
+    const filter = {
+      _id: { $oid: props._id },
+    };
+    await memoApi.deleteOne(filter);
+  };
+
   return (
     <React.Fragment>
       <List sx={{ width: "100%" }}>
@@ -58,10 +67,22 @@ export const MainTaskList = (props: Tasks) => {
           </ListItemIcon>
           <ListItemText primary={props.title} />
           <Button
+            variant="outlined"
+            onClick={(event) => {
+              event.stopPropagation();
+              deleteTask();
+            }}
+            style={{ marginRight: 10 }}
+          >
+            削除
+          </Button>
+          <Button
+            variant="contained"
             onClick={(event) => {
               event.stopPropagation();
               handleClickOpenDetals();
             }}
+            style={{ marginRight: 10 }}
           >
             詳細
           </Button>

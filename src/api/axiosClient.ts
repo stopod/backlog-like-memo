@@ -7,7 +7,6 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use((config: any) => {
-  console.log(config);
   return {
     ...config,
     headers: {
@@ -19,7 +18,12 @@ axiosClient.interceptors.request.use((config: any) => {
 
 axiosClient.interceptors.response.use(
   (response) => {
-    return response.data.documents;
+    // 取得はdocumentsに入ってくる。。。
+    if (response.data?.documents) {
+      return response.data?.documents;
+    } else {
+      return response.data;
+    }
   },
   (err) => {
     throw err.response;
