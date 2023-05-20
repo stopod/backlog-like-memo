@@ -1,10 +1,10 @@
-import React, { createContext, useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { Home } from "./pages/Home";
 import { Headers } from "./components/Headers";
 import axios from "axios";
 
 const App = () => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     axios
       .post(
         process.env.REACT_APP_MONGODB_ACCES_TOKEN_URL as string,

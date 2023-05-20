@@ -10,7 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { ChildTask } from "../api/entity/ChildTaskEntity";
+import { ChildTask } from "../api/childTaskApi";
 
 export const ChildTaskList = (props: ChildTask | null) => {
   const [openDetails, setOpenDetails] = React.useState(false);
@@ -25,20 +25,11 @@ export const ChildTaskList = (props: ChildTask | null) => {
 
   return (
     <List component="div" disablePadding>
-      <ListItemButton sx={{ pl: 4 }}>
+      <ListItemButton sx={{ pl: 4 }} onClick={handleClickOpenDetals}>
         <ListItemIcon>
           <TaskOutlinedIcon />
         </ListItemIcon>
         <ListItemText primary={props?.title} />
-        <Button
-          variant="outlined"
-          onClick={(event) => {
-            event.stopPropagation();
-            handleClickOpenDetals();
-          }}
-        >
-          詳細
-        </Button>
       </ListItemButton>
 
       <Dialog

@@ -1,9 +1,8 @@
 import { memo, useEffect, useState } from "react";
 import { MainTaskList } from "../components/MainTaskList";
 import maintTaskApi from "../api/mainTaskApi";
-import childTaskApi from "../api/childTaskApi";
+import childTaskApi, { ChildTask } from "../api/childTaskApi";
 import Button from "@mui/material/Button";
-import { ChildTask } from "../api/entity/ChildTaskEntity";
 
 export type Tasks = {
   _id: string;

@@ -1,5 +1,12 @@
-import { MainTask } from "./entity/MainTaskEntity";
 import axiosClient from "./axiosClient";
+
+export type MainTask = {
+  _id: string;
+  title: string;
+  author: string;
+  details: string;
+  createTime: string;
+};
 
 const document = {
   collection: "MainTask",

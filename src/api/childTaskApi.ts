@@ -1,5 +1,13 @@
-import { ChildTask } from "./entity/ChildTaskEntity";
 import axiosClient from "./axiosClient";
+
+export type ChildTask = {
+  _id: number;
+  title: string;
+  details: string;
+  author: string;
+  status: number;
+  parentTaskId: string;
+};
 
 const document = {
   collection: "ChildTask",

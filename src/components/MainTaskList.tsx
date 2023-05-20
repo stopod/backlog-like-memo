@@ -54,6 +54,15 @@ export const MainTaskList = (props: Tasks) => {
             variant="outlined"
             onClick={(event) => {
               event.stopPropagation();
+            }}
+            style={{ marginRight: 10 }}
+          >
+            追加
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={(event) => {
+              event.stopPropagation();
               handleOpenDetals();
             }}
             style={{ marginRight: 10 }}
