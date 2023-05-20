@@ -31,6 +31,7 @@ export const ChildTaskList = (props: ChildTask | null) => {
         </ListItemIcon>
         <ListItemText primary={props?.title} />
         <Button
+          variant="outlined"
           onClick={(event) => {
             event.stopPropagation();
             handleClickOpenDetals();

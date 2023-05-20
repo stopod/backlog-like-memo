@@ -22,7 +22,7 @@ export const MainTaskList = (props: Tasks) => {
   const [openDetails, setOpenDetails] = React.useState(false);
   const [childTasks, setChildTasks] = React.useState(false);
 
-  const handleClickOpenDetals = () => {
+  const handleOpenDetals = () => {
     setOpenDetails(true);
   };
 
@@ -30,7 +30,7 @@ export const MainTaskList = (props: Tasks) => {
     setOpenDetails(false);
   };
 
-  const handleClick = () => {
+  const handleViewChildList = () => {
     setChildTasks(!childTasks);
   };
 
@@ -45,16 +45,16 @@ export const MainTaskList = (props: Tasks) => {
   return (
     <React.Fragment>
       <List sx={{ width: "100%" }}>
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton onClick={handleViewChildList}>
           <ListItemIcon>
             <TaskIcon />
           </ListItemIcon>
           <ListItemText primary={props.title} />
           <Button
-            variant="contained"
+            variant="outlined"
             onClick={(event) => {
               event.stopPropagation();
-              handleClickOpenDetals();
+              handleOpenDetals();
             }}
             style={{ marginRight: 10 }}
           >
@@ -63,9 +63,8 @@ export const MainTaskList = (props: Tasks) => {
           {childTasks ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={childTasks} timeout="auto" unmountOnExit>
-          {/* TODO: ChildTasks */}
-          {props.childTasks?.map((childTask, index) => {
-            return <ChildTaskList key={index} {...childTask} />;
+          {props.childTasks?.map((childTask) => {
+            return <ChildTaskList key={childTask._id} {...childTask} />;
           })}
         </Collapse>
       </List>

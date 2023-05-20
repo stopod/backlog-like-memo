@@ -53,6 +53,7 @@ export const Headers = () => {
   return (
     <>
       <Button variant="text" onClick={handleClickOpendDialog}>
+        {/* MainTaskListにあるべきなきがしてきた */}
         <PlaylistAddIcon />
         追加
       </Button>
@@ -79,10 +80,11 @@ export const Headers = () => {
             <TextField
               fullWidth
               id="title"
-              label="メインタスクタイトル"
+              label="タイトル"
               margin="normal"
               name="title"
               required
+              variant="standard"
             />
             <TextField
               fullWidth
@@ -91,6 +93,7 @@ export const Headers = () => {
               margin="normal"
               name="author"
               required
+              variant="standard"
             />
             <TextField
               fullWidth
@@ -98,9 +101,14 @@ export const Headers = () => {
               label="詳細"
               margin="normal"
               name="details"
+              variant="filled"
+              multiline
+              rows={3}
               required
             />
-            <Button type="submit">登録</Button>
+            <Button type="submit" variant="outlined">
+              登録
+            </Button>
           </Box>
         </DialogContent>
         <DialogActions>
