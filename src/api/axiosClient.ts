@@ -20,7 +20,7 @@ axiosClient.interceptors.response.use(
   (response) => {
     // 取得はdocumentsに入ってくる。。。
     if (response.data?.documents) {
-      return response.data?.documents;
+      return response.data.documents;
     } else {
       return response.data;
     }

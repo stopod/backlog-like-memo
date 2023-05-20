@@ -1,15 +1,15 @@
-import { MainTask } from "./entity/MainTaskEntity";
+import { ChildTask } from "./entity/ChildTaskEntity";
 import axiosClient from "./axiosClient";
 
 const document = {
-  collection: "MainTask",
+  collection: "ChildTask",
   database: "BacklogLikeMemo",
   dataSource: "Cluster0",
 };
 
 const memoApi = {
   create: async (param: any) => await axiosClient.post("/insertOne", param),
-  findAll: async (): Promise<MainTask[]> =>
+  findAll: async (): Promise<ChildTask[]> =>
     await axiosClient.post("/find", document),
   deleteOne: async (filter: any) => {
     const param = {

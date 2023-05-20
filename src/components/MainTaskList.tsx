@@ -16,24 +16,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import TaskIcon from "@mui/icons-material/Task";
 import { ChildTaskList } from "./ChildTaskList";
 import memoApi from "../api/mainTaskApi";
-// import { ObjectId } from "mongodb";
-
-export type Tasks = {
-  _id: string;
-  title: string;
-  details: string;
-  author: string;
-  createTime: string;
-  childTasks: ChildTask[] | null | undefined;
-};
-
-export type ChildTask = {
-  id: number;
-  title: string;
-  details: string;
-  author: string;
-  status: number;
-};
+import { Tasks } from "../pages/Home";
 
 export const MainTaskList = (props: Tasks) => {
   const [openDetails, setOpenDetails] = React.useState(false);
@@ -56,6 +39,7 @@ export const MainTaskList = (props: Tasks) => {
       _id: { $oid: props._id },
     };
     await memoApi.deleteOne(filter);
+    setOpenDetails(false);
   };
 
   return (
@@ -66,16 +50,6 @@ export const MainTaskList = (props: Tasks) => {
             <TaskIcon />
           </ListItemIcon>
           <ListItemText primary={props.title} />
-          <Button
-            variant="outlined"
-            onClick={(event) => {
-              event.stopPropagation();
-              deleteTask();
-            }}
-            style={{ marginRight: 10 }}
-          >
-            削除
-          </Button>
           <Button
             variant="contained"
             onClick={(event) => {
@@ -119,7 +93,12 @@ export const MainTaskList = (props: Tasks) => {
           ></Box> */}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDetails}>閉じる</Button>
+          <Button variant="outlined" color="error" onClick={deleteTask}>
+            削除
+          </Button>
+          <Button variant="outlined" onClick={handleCloseDetails}>
+            閉じる
+          </Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

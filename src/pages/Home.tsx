@@ -1,7 +1,18 @@
 import { memo, useEffect, useState } from "react";
-import { MainTaskList, Tasks } from "../components/MainTaskList";
-import memoApi from "../api/mainTaskApi";
+import { MainTaskList } from "../components/MainTaskList";
+import maintTaskApi from "../api/mainTaskApi";
+import childTaskApi from "../api/childTaskApi";
 import Button from "@mui/material/Button";
+import { ChildTask } from "../api/entity/ChildTaskEntity";
+
+export type Tasks = {
+  _id: string;
+  title: string;
+  details: string;
+  author: string;
+  createTime: string;
+  childTasks: ChildTask[] | null | undefined;
+};
 
 export const Home = () => {
   const [tasks, setTasks] = useState<Tasks[]>([]);
@@ -12,32 +23,13 @@ export const Home = () => {
 
   const fetchData = async () => {
     try {
-      const mainTasks = await memoApi.findAll();
+      const mainTasks = await maintTaskApi.findAll();
+      const childTasks = await childTaskApi.findAll();
       const currentTasks: Tasks[] = mainTasks.map((task) => ({
         ...task,
-        childTasks: [
-          {
-            id: 11,
-            title: "sample child task",
-            details: "sample sample sample",
-            status: 0,
-            author: "stopod",
-          },
-          {
-            id: 12,
-            title: "sample child task",
-            details: "sample sample sample",
-            status: 0,
-            author: "stopod",
-          },
-          {
-            id: 13,
-            title: "sample child task",
-            details: "sample sample sample",
-            status: 0,
-            author: "stopod",
-          },
-        ],
+        childTasks: childTasks.filter(
+          (childTask) => childTask.parentTaskId === task._id
+        ),
       }));
 
       setTasks(currentTasks);
