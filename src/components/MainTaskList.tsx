@@ -15,31 +15,22 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import TaskIcon from "@mui/icons-material/Task";
 import { ChildTaskList } from "./ChildTaskList";
-import memoApi from "../api/mainTaskApi";
 import { Tasks } from "../pages/Home";
+import RegisterChildTaskDialog from "./RegisterChildTaskDialog";
+import DetailMainTaskDialog from "./DetailMainTaskDialog";
+import {
+  State,
+  Action,
+  initialState,
+  reducer,
+} from "../reducer/MainTaskListReducer";
 
 export const MainTaskList = (props: Tasks) => {
-  const [openDetails, setOpenDetails] = React.useState(false);
   const [childTasks, setChildTasks] = React.useState(false);
-
-  const handleOpenDetals = () => {
-    setOpenDetails(true);
-  };
-
-  const handleCloseDetails = () => {
-    setOpenDetails(false);
-  };
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const handleViewChildList = () => {
     setChildTasks(!childTasks);
-  };
-
-  const deleteTask = async () => {
-    const filter = {
-      _id: { $oid: props._id },
-    };
-    await memoApi.deleteOne(filter);
-    setOpenDetails(false);
   };
 
   return (
@@ -54,6 +45,9 @@ export const MainTaskList = (props: Tasks) => {
             variant="outlined"
             onClick={(event) => {
               event.stopPropagation();
+              dispatch({
+                type: "openRegisterChildTaskDialog",
+              });
             }}
             style={{ marginRight: 10 }}
           >
@@ -63,7 +57,9 @@ export const MainTaskList = (props: Tasks) => {
             variant="outlined"
             onClick={(event) => {
               event.stopPropagation();
-              handleOpenDetals();
+              dispatch({
+                type: "openDetailMainTaskDialog",
+              });
             }}
             style={{ marginRight: 10 }}
           >
@@ -78,37 +74,25 @@ export const MainTaskList = (props: Tasks) => {
         </Collapse>
       </List>
 
-      <Dialog
-        fullWidth={true}
-        maxWidth={"lg"}
-        open={openDetails}
-        onClose={handleCloseDetails}
-      >
-        <DialogTitle>
-          {props._id}-{props.title}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>{props.details}</DialogContentText>
-          {/* <Box
-            noValidate
-            component="form"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              m: "auto",
-              width: "fit-content",
-            }}
-          ></Box> */}
-        </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" color="error" onClick={deleteTask}>
-            削除
-          </Button>
-          <Button variant="outlined" onClick={handleCloseDetails}>
-            閉じる
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {/* 詳細用ダイアログ */}
+      <DetailMainTaskDialog
+        isOpen={state.isDetailMainTaskDialog}
+        closeDialog={() =>
+          dispatch({
+            type: "closeDetailMainTaskDialog",
+          })
+        }
+        task={props}
+      />
+      {/* 登録用ダイアログ */}
+      <RegisterChildTaskDialog
+        isOpen={state.isRegisterChildTaskDialg}
+        closeDialog={() =>
+          dispatch({
+            type: "closeRegisterChildTaskDialog",
+          })
+        }
+      />
     </React.Fragment>
   );
 };
