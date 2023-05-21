@@ -23,3 +23,7 @@ https://backlog-like-memo.vercel.app/
 - 403 エラーの解消  
    https://realm.mongodb.com/groups/64560c79d311ea6274c87c5a/apps/6457383f88025670f5e93ac4/settings/general  
   　ここで設定が必要だった
+
+- いまめっちゃ自動更新しちゃう
+
+- AccessToken の取得が終わる前に初回一覧取得をかけにいっちゃう～
