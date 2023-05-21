@@ -19,23 +19,17 @@ export const Headers = () => {
     e.preventDefault();
 
     const data = new FormData(formRef.current);
-    const title = data.get("title");
-    const author = data.get("author");
-    const details = data.get("details");
+    const title = data.get("title") as string;
+    const author = data.get("author") as string;
+    const details = data.get("details") as string;
 
     try {
-      const param = {
-        collection: "MainTask",
-        database: "BacklogLikeMemo",
-        dataSource: "Cluster0",
-        document: {
-          title,
-          author,
-          details,
-          createTime: new Date().toLocaleString(),
-        },
-      };
-      const res = await memoApi.create(param);
+      const res = await memoApi.create({
+        title,
+        author,
+        details,
+        createTime: new Date().toLocaleString(),
+      });
       setOpenAddTaskDialog(false);
     } catch (error) {
       console.log(error);

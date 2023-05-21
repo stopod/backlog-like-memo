@@ -1,8 +1,9 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useReducer, useState } from "react";
 import { MainTaskList } from "../components/MainTaskList";
 import maintTaskApi from "../api/mainTaskApi";
 import childTaskApi, { ChildTask } from "../api/childTaskApi";
 import Button from "@mui/material/Button";
+import { State, Action, initialState, reducer } from "../reducer/HomeReducer";
 
 export type Tasks = {
   _id: string;
@@ -14,7 +15,7 @@ export type Tasks = {
 };
 
 export const Home = () => {
-  const [tasks, setTasks] = useState<Tasks[]>([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     fetchData();
@@ -31,7 +32,10 @@ export const Home = () => {
         ),
       }));
 
-      setTasks(currentTasks);
+      dispatch({
+        type: "getTasks",
+        data: currentTasks,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -43,9 +47,9 @@ export const Home = () => {
         {/* TODO: いつか消す */}
         更新
       </Button>
-      {tasks.map((task) => (
-        <MainTaskList key={task._id} {...task} />
-      ))}
+      {state
+        ? state.tasks.map((task) => <MainTaskList key={task._id} {...task} />)
+        : null}
     </>
   );
 };

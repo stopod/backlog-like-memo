@@ -29,9 +29,7 @@ const DetailMainTaskDialog = (props: Props) => {
       open={props.isOpen}
       onClose={() => props.closeDialog()}
     >
-      <DialogTitle>
-        {props.task._id}-{props.task.title}
-      </DialogTitle>
+      <DialogTitle>{props.task.title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{props.task.details}</DialogContentText>
       </DialogContent>

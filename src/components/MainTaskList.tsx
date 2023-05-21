@@ -1,11 +1,5 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -26,17 +20,17 @@ import {
 } from "../reducer/MainTaskListReducer";
 
 export const MainTaskList = (props: Tasks) => {
-  const [childTasks, setChildTasks] = React.useState(false);
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [childTasks, setChildTasks] = React.useState(false);
 
-  const handleViewChildList = () => {
+  const handleViewChildTasks = () => {
     setChildTasks(!childTasks);
   };
 
   return (
     <React.Fragment>
       <List sx={{ width: "100%" }}>
-        <ListItemButton onClick={handleViewChildList}>
+        <ListItemButton onClick={handleViewChildTasks}>
           <ListItemIcon>
             <TaskIcon />
           </ListItemIcon>
@@ -92,6 +86,7 @@ export const MainTaskList = (props: Tasks) => {
             type: "closeRegisterChildTaskDialog",
           })
         }
+        parentTaskId={props._id}
       />
     </React.Fragment>
   );

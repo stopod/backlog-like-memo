@@ -8,6 +8,10 @@ export type MainTask = {
   createTime: string;
 };
 
+type Filter = {
+  _id: { $oid: string };
+};
+
 const document = {
   collection: "MainTask",
   database: "BacklogLikeMemo",
@@ -15,10 +19,16 @@ const document = {
 };
 
 const memoApi = {
-  create: async (param: any) => await axiosClient.post("/insertOne", param),
+  create: async (param: Omit<MainTask, "_id">) => {
+    const currentParam = {
+      ...document,
+      document: param,
+    };
+    await axiosClient.post("/insertOne", currentParam);
+  },
   findAll: async (): Promise<MainTask[]> =>
     await axiosClient.post("/find", document),
-  deleteOne: async (filter: any) => {
+  deleteOne: async (filter: Filter) => {
     const param = {
       ...document,
       filter,
