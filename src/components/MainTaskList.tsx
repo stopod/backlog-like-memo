@@ -19,13 +19,24 @@ import {
   reducer,
 } from "../reducer/MainTaskListReducer";
 
-export const MainTaskList = (props: Tasks) => {
+type Props = {
+  task: Tasks;
+  reloadTasks: () => void;
+};
+
+export const MainTaskList = (props: Props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const [childTasks, setChildTasks] = React.useState(false);
 
   const handleViewChildTasks = () => {
     setChildTasks(!childTasks);
   };
+
+  // とりあえず、これだとダイアログ開閉のたびにfetchしちゃう
+  React.useEffect(() => {
+    console.log("render");
+    props.reloadTasks();
+  }, [state]);
 
   return (
     <React.Fragment>
@@ -34,7 +45,7 @@ export const MainTaskList = (props: Tasks) => {
           <ListItemIcon>
             <TaskIcon />
           </ListItemIcon>
-          <ListItemText primary={props.title} />
+          <ListItemText primary={props.task.title} />
           <Button
             variant="outlined"
             onClick={(event) => {
@@ -62,7 +73,7 @@ export const MainTaskList = (props: Tasks) => {
           {childTasks ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={childTasks} timeout="auto" unmountOnExit>
-          {props.childTasks?.map((childTask) => {
+          {props.task.childTasks?.map((childTask) => {
             return <ChildTaskList key={childTask._id} {...childTask} />;
           })}
         </Collapse>
@@ -76,7 +87,7 @@ export const MainTaskList = (props: Tasks) => {
             type: "closeDetailMainTaskDialog",
           })
         }
-        task={props}
+        task={props.task}
       />
       {/* 登録用ダイアログ */}
       <RegisterChildTaskDialog
@@ -86,7 +97,7 @@ export const MainTaskList = (props: Tasks) => {
             type: "closeRegisterChildTaskDialog",
           })
         }
-        parentTaskId={props._id}
+        parentTaskId={props.task._id}
       />
     </React.Fragment>
   );

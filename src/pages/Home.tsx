@@ -48,7 +48,13 @@ export const Home = () => {
         更新
       </Button>
       {state
-        ? state.tasks.map((task) => <MainTaskList key={task._id} {...task} />)
+        ? state.tasks.map((task) => (
+            <MainTaskList
+              key={task._id}
+              task={task}
+              reloadTasks={() => fetchData()}
+            />
+          ))
         : null}
     </>
   );
