@@ -4,7 +4,8 @@
 使うのは以下です。  
 TypeScript, React, MongoDB Atlas, Vercel
 
-https://backlog-like-memo.vercel.app/
+https://backlog-like-memo.vercel.app/  
+※初回だけ更新しないと表示されないし遅い
 
 # メモ
 
