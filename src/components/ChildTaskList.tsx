@@ -38,9 +38,7 @@ export const ChildTaskList = (props: ChildTask | null) => {
         open={openDetails}
         onClose={handleCloseDetails}
       >
-        <DialogTitle>
-          {props?._id}-{props?.title}
-        </DialogTitle>
+        <DialogTitle>{props?.title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{props?.details}</DialogContentText>
           {/* <Box
