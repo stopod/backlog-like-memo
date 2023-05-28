@@ -4,6 +4,7 @@ import maintTaskApi from "../api/mainTaskApi";
 import childTaskApi, { ChildTask } from "../api/childTaskApi";
 import Button from "@mui/material/Button";
 import { State, Action, initialState, reducer } from "../reducer/HomeReducer";
+import axios from "axios";
 
 export type Tasks = {
   _id: string;
@@ -18,7 +19,22 @@ export const Home = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    fetchData();
+    axios
+      .post(
+        process.env.REACT_APP_MONGODB_ACCES_TOKEN_URL as string,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((tokenData) => {
+        // TODO: ローカルストレージに保存すべきでないのでいつか対応する
+        localStorage.setItem("access_token", tokenData.data.access_token);
+
+        fetchData();
+      });
   }, []);
 
   const fetchData = async () => {
